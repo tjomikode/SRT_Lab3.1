@@ -41,6 +41,16 @@ public class MainActivity extends AppCompatActivity {
             return;
         }
 
+        // ***********************************************
+        // Invalid data checking added
+        if (!isNumeric(number.getText().toString())) {
+            xmin.setText("");
+            xmax.setText("");
+            errorLabel.setText("Incorrect input!");
+            return;
+        }
+        // *******************************************
+
         long n = Long.parseLong(number.getText().toString());
 
         if (n <= 0) {
@@ -78,6 +88,18 @@ public class MainActivity extends AppCompatActivity {
         xmin.setText(Long.toString(a - b));
         xmax.setText(Long.toString(a + b));
     }
+
+    // ************************************************************************
+    // Invalid data checking added
+    public static boolean isNumeric(String x) throws NumberFormatException {
+        try {
+            Long.parseLong(x);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+    // ************************************************************************
 
     public void cleanForms(View v) {
         number.setText("");
