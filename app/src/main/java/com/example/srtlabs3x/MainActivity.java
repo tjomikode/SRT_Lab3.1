@@ -41,15 +41,7 @@ public class MainActivity extends AppCompatActivity {
             return;
         }
 
-        // ***********************************************
-        // Invalid data checking added
-        if (!isNumeric(number.getText().toString())) {
-            xmin.setText("");
-            xmax.setText("");
-            errorLabel.setText("Incorrect input!");
-            return;
-        }
-        // *******************************************
+
 
         long n = Long.parseLong(number.getText().toString());
 
