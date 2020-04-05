@@ -41,8 +41,16 @@ public class MainActivity extends AppCompatActivity {
             return;
         }
 
-        int n = Integer.parseInt(number.getText().toString());
-
+        long n = Long.parseLong(number.getText().toString());
+        // ***********************************************
+        // Invalid data checking added
+        if (!isNumeric(number.getText().toString())) {
+            xmin.setText("");
+            xmax.setText("");
+            errorLabel.setText("Incorrect input!");
+            return;
+        }
+        // *******************************************
         if (n <= 0) {
             xmin.setText("");
             xmax.setText("");
@@ -57,17 +65,17 @@ public class MainActivity extends AppCompatActivity {
             return;
         }
 
-        int a = (int) Math.ceil(Math.sqrt(n));
+        long a = (int) Math.ceil(Math.sqrt(n));
 
         if (a * a == n) {
             errorLabel.setText("");
-            xmin.setText(Integer.toString(a));
-            xmax.setText(Integer.toString(a));
+            xmin.setText(Long.toString(a));
+            xmax.setText(Long.toString(a));
             return;
         }
         int b;
         while (true) {
-            int b1 = (a * a) - n;
+            long b1 = (a * a) - n;
             b = (int) (Math.sqrt(b1));
             if (b * b == b1)
                 break;
@@ -75,9 +83,21 @@ public class MainActivity extends AppCompatActivity {
                 a += 1;
         }
         errorLabel.setText("");
-        xmin.setText(Integer.toString(a - b));
-        xmax.setText(Integer.toString(a + b));
+        xmin.setText(Long.toString(a - b));
+        xmax.setText(Long.toString(a + b));
     }
+
+    // ************************************************************************
+    // Invalid data checking added
+    public static boolean isNumeric(String x) throws NumberFormatException {
+        try {
+            Long.parseLong(x);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+    // ************************************************************************
 
     public void cleanForms(View v) {
         number.setText("");
